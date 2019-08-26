@@ -1,0 +1,122 @@
+1)
+Herencia de clases:
+    Crear una clase hijo a partir de una clase padre. La clase hijo hereda todos los métodos y atributos 
+    pero puede añadir más o cambiar los ya existentes para que ejecuten mejor su función dentro 
+    de la nueva clase.
+
+    public class Vehiculo {
+
+        private char tipo;
+
+        public void cambiarTipo(char newTipo) {
+            this.tipo = newTipo;
+        }
+    }
+
+    public class Avion extends Vehiculo {
+
+        private String modelo;
+        private String marca;
+
+        public void verificarModelo() {
+            ...
+        }
+    }
+
+    Ahora Avion va a tener tipo, marca y modelo. Tambien va a tener tanto el método "cambiarTipo" que estaba 
+    originalmente en la clase padre como el método "verificarModelo".
+
+
+Alta Cohesión:
+    En un código, principalmente en uno que puede llegar a ser alterado o revisado por otros, es importante
+    que sea fácil de entender y todo tenga sentido. Para esto es importante hacer que, por ejemplo, los métodos
+    tengan sentido y se relacionen directamente con la clase, y que limiten su campo de acción a esa clase 
+    para no causar ningún malentendido y si se cambia una, no se afecta al resto. 
+
+
+Bajo Acoplamiento:
+    Reducir las dependencias entre las funciones (los métodos), un ejemplo:
+
+        Vuelos.getPasajero(numeroDePasajero).getBoleto().getPrecio(); 
+        
+        //Esto está MAL, hay demasiadas dependencias entre los
+        métodos y es muy difícil de leer. Lo correcto, en cambio, sería:
+
+        Vuelos.getPrecioFromBoleto(numeroDePasajero)
+
+
+Redefinición de Funciones:
+    Cuando la clase hijo tiene un método de igual nombre a uno que hereda de la clase padre, este se reescribe
+    para hacer lo que le dice la clase hijo, ejemplo:
+
+        public class Avion {
+            ...
+            public void takeOff() {
+                this.motor = encendido;
+                wait();
+                this.ruedas = arriba;
+            }
+        }
+
+    En takeOff se prende el motor, espera, y después se suben las ruedas, pero:
+
+        public class VTOL extends Avion {
+            private String automaticVerticalTakeOffAndLanding;
+            
+            public void takeOff() {
+                this.automaticVerticalTakeOffAndLanding = encendido;
+                wait();
+                this.pilotoAutomatico = encendido;
+                this.ruedas = arriba;
+            }
+        }
+
+    Los métodos se llaman igual, pero en VTOL, el takeOff de VTOL que usa el automaticVerticalTakeOffAndLanding
+    va a ser el que se usa, y no el simple de Avion. Basicamente, en VTOL, el takeOff de VTOL va a 
+    reemplazar al de Avion.
+
+
+2)
+
+this(): constructor de la clase en cuestión.
+super(): constructor de la superclase. En el ejemplo de arriba, si yo en VTOL hago super(), voy a crear un
+    nuevo objeto Avion.
+super: hacer referencia a un método o atributo de la superclase, por ejemplo super.takeOff, usado en VTOL, 
+    hace referencia al takeOff de Avion, no al de VTOL.
+extends: se usa al hacer una clase, y declara que la clase extiende otra clase, es decir, hereda todos los
+    atributos y métodos de la superclase, y puede agregar también sus propios métodos y atributos.
+assertTrue(): se usa para Test, si la condición dentro del paréntesis es true, devuelve true (osea, el 
+    resultado es el esperado)
+assertFalse: se usa para Test, si la condición dentro del paréntesis es false, devuelve true (osea, el 
+    resultado es el esperado)
+assertEquals(): compara dos valores u objetos, y si son iguales devuelve true, si no devuelve false.
+enum: para declarar un tipo enumerado.
+import: importar una librería externa o mismo un archivo local que está en otra carpeta.
+package: indica la dirección del archivo en carpetas. Osea, dónde está.
+
+
+3) package a.b.c;
+
+
+4)
+a) composición: x esta HECHO de y. 
+    Si y cambia, también cambia x.
+
+    Un auto(x) está hecho con un motor(y), si el motor se rompe, no funciona el auto.
+
+   agregación: x esta agregado a y.
+    Si y cambia, x no cambia ya que es independiente a y.
+
+    Un profesor(x) da clases en un departamento(y) de la facultad.
+    Si el departamento por alguna razón cierra, el profesor no se muere.
+
+b)
+
+
+c) Indica la cantidad que comprende cada relaciónj entre dos clases, ejemplo
+
+1..* ---------> 1..15   (de uno o más a uno hasta quince)
+0..* ---------> 4   (de 0 o más a cuatro)
+
+
+
