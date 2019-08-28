@@ -35,7 +35,11 @@ public class MadreHijoTest {
     @Test
     public void testHijos() {
 
-        Hijo awa = new Hijo("Juan", "Pol", 34, 23334524, "Plomero", "Ninguna", "Lego Legions");
-        Hijo owo = new Hijo("Juana", "Pofla", 14, 68334524, "Estudiante", "Lama", "Lego Legions");
+        Hijo awa = new Hijo("Juan", "Pol", 34, 23334524, "Plomero", "Plomeria Master", "Ninguna", "Lego Legions");
+        Hijo owo = new Hijo("Juana", "Pofla", 14, 68334524, "Estudiante", "Ninguna", "Lama", "Lego Legions");
+        Madre wanda = new Madre();
+        wanda.addHijo(awa);
+        wanda.addHijo(owo);
+        assertTrue(wanda.hijosMenoresDeEdad().contains(owo));
     }
 }
